@@ -39,23 +39,26 @@ public class ChatServerThread implements Runnable {
 
     @Override
     public void run() {
+        Timestamp timestamp = new Timestamp((new Date()).getTime());
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             while (socket.isConnected() && !socket.isClosed()) {
                 String data = bufferedReader.readLine();
                 for (var ct : connectionsThreadList) {
-                    ct.sendMessage("[" + new Timestamp((new Date()).getTime()) + "] " + data + '\n');
+                    ct.sendMessage("[" + timestamp + "] " + data + '\n');
                 }
             }
         } catch (IOException ioe) {
             if(ioe instanceof SocketException) {
-                System.out.println(socket.getInetAddress().toString() + ":" + socket.getPort() + " has lost connection to the server");
+                System.out.println("[" + timestamp + "] " + socket.getInetAddress().toString() + ":" + socket.getPort() + " has lost connection to the server");
             } else {
                 throw new RuntimeException(ioe);
             }
         } finally {
             close();
-            connectionsThreadList.remove(this);
+            synchronized (connectionsThreadList) {
+                connectionsThreadList.remove(this);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ package org.chat_server.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
@@ -28,13 +29,20 @@ public class ChatServer {
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);
             }
+            Timestamp timestamp = new Timestamp((new Date()).getTime());
 
-            System.out.println("[" + new Timestamp((new Date()).getTime()) + "] " +
+            System.out.println(
+                    "[" + timestamp + "] " +
                     socket.getInetAddress().toString() + ":" + socket.getPort() +
-                    " has connected to the server.");
+                    " has connected to the server."
+            );
 
             ChatServerThread thread = new ChatServerThread(socket, connectionThreads);
-            connectionThreads.add(thread);
+
+            synchronized (connectionThreads) {
+                connectionThreads.add(thread);
+            }
+
             new Thread(thread).start();
         }
     }
