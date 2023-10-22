@@ -44,8 +44,10 @@ public class ChatServerThread implements Runnable {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             while (socket.isConnected() && !socket.isClosed()) {
                 String data = bufferedReader.readLine();
-                for (var ct : connectionsThreadList) {
-                    ct.sendMessage("[" + timestamp + "] " + data + '\n');
+                synchronized (connectionsThreadList) {
+                    for (var ct : connectionsThreadList) {
+                        ct.sendMessage("[" + timestamp + "] " + data + '\n');
+                    }
                 }
             }
         } catch (IOException ioe) {
