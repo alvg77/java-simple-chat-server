@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de763d77-ce98-4df3-bbd3-150260638442" name="Changes" comment="server for chat">
+    <list default="true" id="de763d77-ce98-4df3-bbd3-150260638442" name="Changes" comment="fix sync">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chat_server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chat_server/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chat_server/server/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chat_server/server/ChatServer.java" afterDir="false" />
@@ -76,6 +76,9 @@
       <updated>1697896586885</updated>
       <workItem from="1697896588306" duration="15562000" />
       <workItem from="1697970706239" duration="1083000" />
+      <workItem from="1697971805368" duration="2846000" />
+      <workItem from="1697989579953" duration="4509000" />
+      <workItem from="1698064975260" duration="2415000" />
     </task>
     <task id="LOCAL-00001" summary="server for chat">
       <created>1697917860967</created>
@@ -105,7 +108,28 @@
       <option name="project" value="LOCAL" />
       <updated>1697971446973</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="server for chat">
+      <created>1697971813194</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1697971813194</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix sync">
+      <created>1697973290968</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1697973290968</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix sync">
+      <created>1697973322027</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697973322027</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +160,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="server for chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="server for chat" />
+    <MESSAGE value="fix sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix sync" />
   </component>
 </project>

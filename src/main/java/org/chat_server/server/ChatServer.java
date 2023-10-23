@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class ChatServer {
     private Set<ChatServerThread> connectionThreads;
@@ -29,13 +30,8 @@ public class ChatServer {
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);
             }
-            Timestamp timestamp = new Timestamp((new Date()).getTime());
 
-            System.out.println(
-                    "[" + timestamp + "] " +
-                    socket.getInetAddress().toString() + ":" + socket.getPort() +
-                    " has connected to the server."
-            );
+            Logger.getGlobal().info(socket.getInetAddress().toString() + ":" + socket.getPort() + " has connected to the server");
 
             ChatServerThread thread = new ChatServerThread(socket, connectionThreads);
 

@@ -6,12 +6,14 @@ import java.net.SocketException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class ChatServerThread implements Runnable {
     private Socket socket;
     private Set<ChatServerThread> connectionsThreadList;
     private DataOutputStream outputStream;
     private BufferedReader bufferedReader;
+
     ChatServerThread(Socket socket, Set<ChatServerThread> connectionsThreadList) {
         this.socket = socket;
         this.connectionsThreadList = connectionsThreadList;
@@ -42,8 +44,8 @@ public class ChatServerThread implements Runnable {
         Timestamp timestamp = new Timestamp((new Date()).getTime());
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            while (socket.isConnected() && !socket.isClosed()) {
-                String data = bufferedReader.readLine();
+            String data;
+            while ((data = bufferedReader.readLine()) != null) {
                 synchronized (connectionsThreadList) {
                     for (var ct : connectionsThreadList) {
                         ct.sendMessage("[" + timestamp + "] " + data + '\n');
@@ -51,16 +53,13 @@ public class ChatServerThread implements Runnable {
                 }
             }
         } catch (IOException ioe) {
-            if(ioe instanceof SocketException) {
-                System.out.println("[" + timestamp + "] " + socket.getInetAddress().toString() + ":" + socket.getPort() + " has lost connection to the server");
-            } else {
-                throw new RuntimeException(ioe);
-            }
+            Logger.getGlobal().severe(ioe.getMessage());
         } finally {
             close();
             synchronized (connectionsThreadList) {
                 connectionsThreadList.remove(this);
             }
+            Logger.getGlobal().info(socket.getInetAddress().toString() + ":" + socket.getPort() + " has disconnected from the server");
         }
     }
 }
