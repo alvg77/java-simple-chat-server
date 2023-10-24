@@ -19,7 +19,7 @@ public class ChatServer {
         try {
             this.serverSocket = new ServerSocket(portNum);
         } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
+            Logger.getGlobal().severe(ioe.getMessage());
         }
     }
     public void handleConnections() {
